@@ -11,16 +11,15 @@
 
                 <div class="card__panel-head">
                     <div class="poster__info">
-                        {% comment %} <a href="{% url 'profile' post.author.pk %}" class="poster__name"> {% endcomment %}
-                        <a href="{% url 'helloworld' %}" class="poster__name">
+                        <a href="{% url 'user_detail' post.author.pk %}" class="poster__name">
                             {% if post.author.profile_pic %}
                                 <img class="poster__profilepic" src="/{{ post.author.profile_pic }}">
                             {% endif %}
                             {{ post.author.username }}
                         </a>
-                        {% comment %} <span class="poster__timestamp">
+                        <span class="poster__timestamp">
                             {{ post.posted_on|timesince }}
-                        </span> {% endcomment %}
+                        </span>
                     </div>
                 </div>
 
@@ -38,15 +37,14 @@
                         <a class="view-more"></a>
                         {% for comment in post.comments.all %}
                         <li class="comment-list__comment">
-                            {% comment %} <a href="{% url 'profile' comment.user.pk %}" class="user">
+                            <a href="{% url 'user_detail' comment.user.pk %}" class="user">
                                 {{ comment.user.username }}
-                            </a> {% endcomment %}
+                            </a>
                             <span class="comment">{{ comment.comment }}</span>
                         </li>
                         {% endfor %}
                     </ul>
                     <section class="input-row">
-                        {% comment %} <i class="fa fa-heart-o submit-like" aria-hidden="true"></i> {% endcomment %}
                         <i class="fa {% has_user_liked_post post user %} submit-like" aria-hidden="true"></i>
                         <div class="comment-input-wrapper">
                             <input class="add-comment" type="text" placeholder="Add a comment...">
