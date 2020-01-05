@@ -68,11 +68,10 @@ class PostDetailView(LoginRequiredMixin, DetailView):
         return data
 
 # Create
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(CreateView):
     model = Post
     template_name = "post_create.html"
     fields = '__all__'
-    login_url = 'login'
 
 # Update
 class PostUpdateView(UpdateView):
