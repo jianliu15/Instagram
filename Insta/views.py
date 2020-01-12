@@ -57,6 +57,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'post_detail.html'
+    login_url = 'login'
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -68,21 +69,29 @@ class PostDetailView(LoginRequiredMixin, DetailView):
         return data
 
 # Create
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = "post_create.html"
-    fields = '__all__'
+    # fields = '__all__'
+    fields = ['title', 'image']
+    login_url = 'login'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 # Update
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'post_update.html'
     fields = ['title']
+    login_url = 'login'
 
 # Delete
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
+    login_url = 'login'
     success_url = reverse_lazy('home')
 
 # Signup View
