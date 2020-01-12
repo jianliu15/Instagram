@@ -17,6 +17,15 @@
 
         <div class="image__wrapper">
             <img class="card__main-image" src="/{{object.image}}" width='1000', height='1000'>
+                <h4 class="username">{{ object.title }}</h4>
+                {% if user == object.author %}
+                    <a class="edit-desktop" href="{% url 'post_update' object.pk %}">
+                        <button class="edit-profile">Edit Post</button>
+                    </a>
+                    <a class="edit-desktop" href="{% url 'post_delete' object.pk %}">
+                        <button class="edit-profile">Delete Post</button>
+                    </a>
+                {% endif %}
         </div>
 
         <div class="comments-portion">
